@@ -5,6 +5,12 @@
     <p>{{fullName}} {{time}}</p>
     <button @click="updateName(1)">更新firstName</button>
     <button @click="updateName(2)">更新lastName</button>
+    <button @click="updateTime">更新time</button>
+    <button @click="updateFullName">更新fullName</button>
+    <pre>
+      更新 firstName 或者 lastName 的数据时，fullName 数据才会更新，这说明当数据挂载到 DOM 上的时候会缓存起来，
+      如果数据不更新，则还会继续使用缓存的数据，当数据更新时才会调用 watch 里面的方法，这就比 methods 的方法要好很多
+    </pre>
   </div>
 </template>
 
@@ -69,6 +75,12 @@ export default {
         this.time++
         this.lastName = "world" + this.time
       }
+    },
+    updateTime () {
+      this.time++
+    },
+    updateFullName () {
+      this.fullName = '你好 大佬'
     }
   },
 

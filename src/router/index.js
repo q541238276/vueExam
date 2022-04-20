@@ -7,6 +7,9 @@ import bexam from '@/view/bexam'
 import cexam from '@/view/cexam'
 import cexam1 from '@/view/cexam1'
 import cexam2 from '@/view/cexam2'
+import dexam from '@/view/dexam'
+import eexam from '@/view/eexam'
+import fexam from '@/view/fexam'
 
 Vue.use(Router)
 
@@ -46,6 +49,21 @@ export default new Router({
           path: '/cexam2',
           name: 'cexam2',
           component: cexam2
+        },
+        {
+          path: '/dexam',
+          name: 'dexam',
+          component: dexam
+        },
+        {
+          path: '/eexam',
+          name: 'eexam',
+          component: eexam
+        },
+        {
+          path: '/fexam',
+          name: 'fexam',
+          component: fexam
         }
       ]
     }

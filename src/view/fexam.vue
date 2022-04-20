@@ -1,13 +1,18 @@
-<!-- computed -->
+<!-- 循环渲染 -->
 <template>
   <div class=''>
-    <div>{{fullName}} {{time}}</div>
-    <button @click="updateName(1)">更新firstName</button>
-    <button @click="updateName(2)">更新lastName</button>
-    <button @click="updateTime">更新time</button>
-    <button @click="updateFullName">更新fullName</button>
+    <template v-for="(val, index) of list">
+      <li :key="index">
+        {{val}}
+      </li>
+    </template>
+    <button @click="upDateList">修改数组([index])</button>
+    <button @click="addList">修改数组(push)</button>
+    <!-- <button @click="setList">修改数组($set)</button> -->
     <pre>
-      效果跟watch一致，但是不能直接改变computed里面定义的数据
+      通过下标修改无效 原因参照https://zhuanlan.zhihu.com/p/341599531
+      vue内置数组操作api  push，pop，shift，unshift，splice，sort，reverse
+      其他的数组操作不起作用
     </pre>
   </div>
 </template>
@@ -31,31 +36,12 @@ export default {
   data () {
     //这里存放数据
     return {
-      firstName: 'hello',
-      lastName: 'world',
-      time: 1
+      list: ["aaa", "bbb", "ccc"]
     };
   },
 
   //计算属性 类似于data概念
-  computed: {
-    fullName () {
-      console.log("计算了一次");
-      return this.firstName + " " + this.lastName;
-    }
-    // fullName: {
-    //   get () {
-    //     console.log("计算了一次");
-    //     return this.firstName + " " + this.lastName;
-    //   },
-    //   set (value) {
-    //     console.log(value);
-    //     var result = value.split(" ");
-    //     this.firstName = result[0];
-    //     this.lastName = result[1];
-    //   }
-    // }
-  },
+  computed: {},
 
   //监控data中的数据变化
   watch: {},
@@ -72,20 +58,15 @@ export default {
 
   //方法集合
   methods: {
-    updateName (num) {
-      if (num == 1) {
-        this.time++
-        this.firstName = "hello" + this.time
-      } else {
-        this.time++
-        this.lastName = "world" + this.time
-      }
+    upDateList () {
+      this.list[this.list.length] = "ddd";
+      console.log(this.list);
     },
-    updateTime () {
-      this.time++
+    addList () {
+      this.list.push("ddd");
     },
-    updateFullName () {
-      this.fullName = '你好 大佬'
+    setList () {
+      this.$set(this.list, this.list.length, "ddd");
     }
   },
 

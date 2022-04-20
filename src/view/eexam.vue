@@ -1,14 +1,18 @@
-<!-- computed -->
+<!-- 条件渲染 -->
 <template>
   <div class=''>
-    <div>{{fullName}} {{time}}</div>
-    <button @click="updateName(1)">更新firstName</button>
-    <button @click="updateName(2)">更新lastName</button>
-    <button @click="updateTime">更新time</button>
-    <button @click="updateFullName">更新fullName</button>
+    <div class="title">v-if跟v-show的区别</div>
+    <p v-if="show">{{title}} 1 </p>
+    <p v-show="show">{{title}} 2 </p>
+    <button @click="changeShow">修改show</button>
     <pre>
-      效果跟watch一致，但是不能直接改变computed里面定义的数据
+      当 app.show = false；时 v-if 的 p 标签被删除了，
+      而 v-show = false；时的 p 标签是添加了一个 style="display: none"；的样式。
+      如果是频发操作 DOM 我们建议用 v-show 指令，这样可以有效的减少 DOM 的挂载和删除
     </pre>
+    <div class="title">v-if常用的地方</div>
+    <p v-if="show">{{title}} 1 </p>
+    <p v-else>{{title}} 2 </p>
   </div>
 </template>
 
@@ -31,31 +35,13 @@ export default {
   data () {
     //这里存放数据
     return {
-      firstName: 'hello',
-      lastName: 'world',
-      time: 1
+      title: "hello world",
+      show: true,
     };
   },
 
   //计算属性 类似于data概念
-  computed: {
-    fullName () {
-      console.log("计算了一次");
-      return this.firstName + " " + this.lastName;
-    }
-    // fullName: {
-    //   get () {
-    //     console.log("计算了一次");
-    //     return this.firstName + " " + this.lastName;
-    //   },
-    //   set (value) {
-    //     console.log(value);
-    //     var result = value.split(" ");
-    //     this.firstName = result[0];
-    //     this.lastName = result[1];
-    //   }
-    // }
-  },
+  computed: {},
 
   //监控data中的数据变化
   watch: {},
@@ -72,20 +58,8 @@ export default {
 
   //方法集合
   methods: {
-    updateName (num) {
-      if (num == 1) {
-        this.time++
-        this.firstName = "hello" + this.time
-      } else {
-        this.time++
-        this.lastName = "world" + this.time
-      }
-    },
-    updateTime () {
-      this.time++
-    },
-    updateFullName () {
-      this.fullName = '你好 大佬'
+    changeShow () {
+      this.show = !this.show;
     }
   },
 

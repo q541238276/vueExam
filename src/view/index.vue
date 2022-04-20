@@ -60,6 +60,9 @@ export default {
             { name: '3.methods', url: '/cexam' },
             { name: '4.watch', url: '/cexam1' },
             { name: '5.computed', url: '/cexam2' },
+            { name: '6.样式绑定', url: '/dexam' },
+            { name: '7.条件渲染', url: '/eexam' },
+            { name: '8.循环渲染', url: '/fexam' },
           ]
         }
       ]
